@@ -65,7 +65,8 @@ def print_stats(stats):
     for ip, count in get_top_items(stats["top_ips"], 3):
         print(f"{ip}: {count}")
     print("Top requests:")
-    for request in stats["top_requests"][:3]:
+    sorted_requests = sorted(stats["top_requests"], key=lambda x: x['duration'], reverse=True)
+    for request in sorted_requests[:3]:
         print(f"Method: {request['method']}, URL: {request['url']}, IP: {request['ip']}, "
               f"Duration: {request['duration']} ms, "
               f"Date and Time: {request['date_time']}")
